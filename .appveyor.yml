@@ -16,6 +16,7 @@ cache:
 
 install:
   # Install LLVM
+  - set "APPVEYOR_SAVE_CACHE_ON_ERROR=true"
   - set "LLVM_INSTALLED=C:\projects\deps\llvm-7.0.1-install\LLVMInstalled.txt"
   - if exist %LLVM_INSTALLED% echo LLVMInstalled.txt found, using cached version
   - if not exist %LLVM_INSTALLED% echo LLVMInstalled.txt not found, building LLVM
