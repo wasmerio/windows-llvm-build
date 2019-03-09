@@ -10,6 +10,8 @@ environment:
       TARGET: x86_64-pc-windows-msvc
 
 cache:
+  - 'C:\projects\deps\llvm-7.0.1.src'
+  - 'C:\projects\deps\llvm-7.0.1-build-dir'
   - 'C:\projects\deps\llvm-7.0.1-install'
 
 install:
@@ -17,12 +19,12 @@ install:
   - set "LLVM_INSTALLED=C:\projects\deps\llvm-7.0.1-install\LLVMInstalled.txt"
   - if exist %LLVM_INSTALLED% echo LLVMInstalled.txt found, using cached version
   - if not exist %LLVM_INSTALLED% echo LLVMInstalled.txt not found, building LLVM
-  - if not exist %LLVM_INSTALLED% mkdir C:\projects\deps
-  - if not exist %LLVM_INSTALLED% mkdir C:\projects\deps\llvm-7.0.1-build-dir
-  - if not exist %LLVM_INSTALLED% mkdir C:\projects\deps\llvm-7.0.1-install
+  - if not exist C:\projects\deps mkdir C:\projects\deps
+  - if not exist C:\projects\deps\llvm-7.0.1-build-dir mkdir C:\projects\deps\llvm-7.0.1-build-dir
+  - if not exist C:\projects\deps\llvm-7.0.1-install mkdir C:\projects\deps\llvm-7.0.1-install
   - if not exist %LLVM_INSTALLED% cd C:\projects\deps
-  - if not exist %LLVM_INSTALLED%  appveyor DownloadFile http://releases.llvm.org/7.0.1/llvm-7.0.1.src.tar.xz -FileName llvm-7.0.1.src.tar.xz
-  - if not exist %LLVM_INSTALLED% 7z x "llvm-7.0.1.src.tar.xz" -so | 7z x -aoa -si -ttar
+  - if not exist C:\projects\deps\llvm-7.0.1.src appveyor DownloadFile http://releases.llvm.org/7.0.1/llvm-7.0.1.src.tar.xz -FileName llvm-7.0.1.src.tar.xz
+  - if not exist C:\projects\deps\llvm-7.0.1.src 7z x "llvm-7.0.1.src.tar.xz" -so | 7z x -aoa -si -ttar
   - if not exist %LLVM_INSTALLED% cd C:\projects\deps\llvm-7.0.1-build-dir
   - if not exist %LLVM_INSTALLED% cmake -G "Visual Studio 15 2017 Win64" -DCMAKE_INSTALL_PREFIX="C:\projects\deps\llvm-7.0.1-install" -DLLVM_TARGETS_TO_BUILD="X86" -DLLVM_BUILD_EXAMPLES=OFF -DLLVM_INCLUDE_EXAMPLES=OFF -DLLVM_BUILD_TESTS=OFF -DLLVM_INCLUDE_TESTS=OFF -Thost=x64 C:\projects\deps\llvm-7.0.1.src
   - if not exist %LLVM_INSTALLED% cmake --build . --config Release --target INSTALL
