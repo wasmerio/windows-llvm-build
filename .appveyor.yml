@@ -8,15 +8,16 @@ environment:
       ARCH: x86_64
       ABI: msvc
       TARGET: x86_64-pc-windows-msvc
+      APPVEYOR_SAVE_CACHE_ON_ERROR: true # Comment out after llvm install cached
+
 
 cache:
-  - 'C:\projects\deps\llvm-7.0.1.src'
-  - 'C:\projects\deps\llvm-7.0.1-build-dir'
+  - 'C:\projects\deps\llvm-7.0.1.src' # Comment out after llvm install cached
+  - 'C:\projects\deps\llvm-7.0.1-build-dir' # Comment out after llvm install cached
   - 'C:\projects\deps\llvm-7.0.1-install'
 
 install:
   # Install LLVM
-  - set "APPVEYOR_SAVE_CACHE_ON_ERROR=true"
   - set "LLVM_INSTALLED=C:\projects\deps\llvm-7.0.1-install\LLVMInstalled.txt"
   - if exist %LLVM_INSTALLED% echo LLVMInstalled.txt found, using cached version
   - if not exist %LLVM_INSTALLED% echo LLVMInstalled.txt not found, building LLVM
