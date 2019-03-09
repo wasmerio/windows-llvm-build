@@ -23,5 +23,5 @@ install:
   - set "LLVM_SYS_70_PREFIX=C:\projects\deps\llvm-7.0.1-install"
   - cd "%APPVEYOR_BUILD_FOLDER%"
 
-  build_script:
-   - echo build complete
+build_script:
+  - echo build complete
