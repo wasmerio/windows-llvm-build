@@ -15,10 +15,10 @@ install:
   - mkdir C:\projects\deps\llvm-7.0.1-build-dir
   - mkdir C:\projects\deps\llvm-7.0.1-install
   - cd C:\projects\deps
-  - appveyor DownloadFile http://releases.llvm.org/7.0.1/llvm-7.0.1.src.tar.xz -FileName llvm-7.0.1.src.tar.xz
-  - 7z x llvm-7.0.1.src.tar.xz -oC:\projects\deps\llvm-7.0.1-src
+  - if not exist llvm-7.0.1.src.tar.xz appveyor DownloadFile http://releases.llvm.org/7.0.1/llvm-7.0.1.src.tar.xz -FileName llvm-7.0.1.src.tar.xz
+  - 7z x "llvm-7.0.1.src.tar.xz" -so | 7z x -aoa -si -ttar
   - cd C:\projects\deps\llvm-7.0.1-build-dir
-  - cmake -G "Visual Studio 15 2017 Win64" -DCMAKE_INSTALL_PREFIX="C:\projects\deps\llvm-7.0.1-install" -DLLVM_TARGETS_TO_BUILD="x86" -Thost=x64 C:\projects\deps\llvm-7.0.1-src
+  - cmake -G "Visual Studio 15 2017 Win64" -DCMAKE_INSTALL_PREFIX="C:\projects\deps\llvm-7.0.1-install" -DLLVM_TARGETS_TO_BUILD="x86" -Thost=x64 C:\projects\deps\llvm-7.0.1.src
   - cmake --build . --config Release --target INSTALL
   - set "LLVM_SYS_70_PREFIX=C:\projects\deps\llvm-7.0.1-install"
   - cd "%APPVEYOR_BUILD_FOLDER%"
