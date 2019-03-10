@@ -22,6 +22,7 @@ install:
   - if exist %LLVM_INSTALLED% echo LLVMInstalled.txt found, using cached version
   - if not exist %LLVM_INSTALLED% echo LLVMInstalled.txt not found, building LLVM
   - if not exist C:\projects\deps mkdir C:\projects\deps
+  - dir C:\projects\deps
   - if not exist C:\projects\deps\llvm-7.0.1-build-dir mkdir C:\projects\deps\llvm-7.0.1-build-dir
   - if not exist C:\projects\deps\llvm-7.0.1-install mkdir C:\projects\deps\llvm-7.0.1-install
   - if not exist %LLVM_INSTALLED% cd C:\projects\deps
