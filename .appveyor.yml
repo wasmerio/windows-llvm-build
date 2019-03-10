@@ -28,15 +28,15 @@ install:
   - if not exist %LLVM_INSTALLED% cd C:\projects\deps
   - if not exist C:\projects\deps\llvm-7.0.1.src appveyor DownloadFile http://releases.llvm.org/7.0.1/llvm-7.0.1.src.tar.xz -FileName llvm-7.0.1.src.tar.xz
   - if not exist C:\projects\deps\llvm-7.0.1.src 7z x "llvm-7.0.1.src.tar.xz" -so | 7z x -aoa -si -ttar
-  - if not exist %LLVM_INSTALLED% cd C:\projects\deps\llvm-7.0.1-build-dir
-  - if not exist %LLVM_INSTALLED% cmake -G "Visual Studio 15 2017 Win64" -DCMAKE_INSTALL_PREFIX="C:\projects\deps\llvm-7.0.1-install" -DLLVM_TARGETS_TO_BUILD="X86" -DLLVM_BUILD_EXAMPLES=OFF -DLLVM_INCLUDE_EXAMPLES=OFF -DLLVM_BUILD_TESTS=OFF -DLLVM_INCLUDE_TESTS=OFF -Thost=x64 C:\projects\deps\llvm-7.0.1.src
-  # - if not exist %LLVM_INSTALLED% cmake --build . --config Release --target INSTALL
-  # - if not exist %LLVM_INSTALLED% dir C:\projects\deps\llvm-7.0.1-install\bin
-  # - if not exist %LLVM_INSTALLED% C:\projects\deps\llvm-7.0.1-install\bin\llvm-config.exe --version
-  # - if not exist %LLVM_INSTALLED% type NUL > %LLVM_INSTALLED%
-  # - set "LLVM_SYS_70_PREFIX=C:\projects\deps\llvm-7.0.1-install"
-  # - echo LLVM Install Ready at C:\projects\deps\llvm-7.0.1-install
-  # - cd "%APPVEYOR_BUILD_FOLDER%"
+  #- if not exist %LLVM_INSTALLED% cd C:\projects\deps\llvm-7.0.1-build-dir
+  #- if not exist %LLVM_INSTALLED% cmake -G "Visual Studio 15 2017 Win64" -DCMAKE_INSTALL_PREFIX="C:\projects\deps\llvm-7.0.1-install" -DLLVM_TARGETS_TO_BUILD="X86" -DLLVM_BUILD_EXAMPLES=OFF -DLLVM_INCLUDE_EXAMPLES=OFF -DLLVM_BUILD_TESTS=OFF -DLLVM_INCLUDE_TESTS=OFF -Thost=x64 C:\projects\deps\llvm-7.0.1.src
+  - if not exist %LLVM_INSTALLED% cmake --build . --config Release --target INSTALL
+  - if not exist %LLVM_INSTALLED% dir C:\projects\deps\llvm-7.0.1-install\bin
+  - if not exist %LLVM_INSTALLED% C:\projects\deps\llvm-7.0.1-install\bin\llvm-config.exe --version
+  - if not exist %LLVM_INSTALLED% type NUL > %LLVM_INSTALLED%
+  - set "LLVM_SYS_70_PREFIX=C:\projects\deps\llvm-7.0.1-install"
+  - echo LLVM Install Ready at C:\projects\deps\llvm-7.0.1-install
+  - cd "%APPVEYOR_BUILD_FOLDER%"
 
 build_script:
   - echo build complete
