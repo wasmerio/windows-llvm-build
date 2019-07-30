@@ -18,7 +18,7 @@ cache:
 
 install:
   # Install LLVM
-  - set "LLVM_INSTALLED=C:\projects\deps\llvm-8.0.0-install\LLVMInstalled.txt"
+  - set "LLVM_INSTALLED=C:\projects\deps\llvm-8.0.0-install\LLVMInstalledAllTargets.txt"
   - if exist %LLVM_INSTALLED% echo LLVMInstalled.txt found, using cached version
   - if not exist %LLVM_INSTALLED% echo LLVMInstalled.txt not found, building LLVM
   - if not exist C:\projects\deps mkdir C:\projects\deps
