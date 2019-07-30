@@ -30,7 +30,7 @@ install:
   - if not exist C:\projects\deps\llvm-8.0.0.src 7z x "llvm-8.0.0.src.tar.xz" -so | 7z x -aoa -si -ttar
   - if not exist %LLVM_INSTALLED% cd C:\projects\deps\llvm-8.0.0-build-dir
   # - if not exist %LLVM_INSTALLED% cmake -G "Visual Studio 15 2017 Win64" -DCMAKE_INSTALL_PREFIX="C:\projects\deps\llvm-8.0.0-install" -DLLVM_TARGETS_TO_BUILD="X86" -DLLVM_BUILD_EXAMPLES=OFF -DLLVM_INCLUDE_EXAMPLES=OFF -DLLVM_BUILD_TESTS=OFF -DLLVM_INCLUDE_TESTS=OFF -Thost=x64 C:\projects\deps\llvm-8.0.0.src
-  - if not exist %LLVM_INSTALLED% cmake -G "Visual Studio 15 2017 Win64" -DCMAKE_INSTALL_PREFIX="C:\projects\deps\llvm-8.0.0-install" -DLLVM_BUILD_EXAMPLES=OFF -DLLVM_INCLUDE_EXAMPLES=OFF -DLLVM_BUILD_TESTS=OFF -DLLVM_INCLUDE_TESTS=OFF -Thost=x64 C:\projects\deps\llvm-8.0.0.src
+  - if not exist %LLVM_INSTALLED% cmake -G "Visual Studio 15 2017 Win64" -DCMAKE_INSTALL_PREFIX="C:\projects\deps\llvm-8.0.0-install" -DLLVM_TARGETS_TO_BUILD="all" -DLLVM_BUILD_EXAMPLES=OFF -DLLVM_INCLUDE_EXAMPLES=OFF -DLLVM_BUILD_TESTS=OFF -DLLVM_INCLUDE_TESTS=OFF -Thost=x64 C:\projects\deps\llvm-8.0.0.src
   - if not exist %LLVM_INSTALLED% cmake --build . --config Release --target INSTALL
   - if not exist %LLVM_INSTALLED% dir C:\projects\deps\llvm-8.0.0-install\bin
   - if not exist %LLVM_INSTALLED% C:\projects\deps\llvm-8.0.0-install\bin\llvm-config.exe --version
