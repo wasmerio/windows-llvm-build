@@ -9,7 +9,7 @@ environment:
       ABI: msvc
       TARGET: x86_64-pc-windows-msvc
       APPVEYOR_SAVE_CACHE_ON_ERROR: true # Comment out after llvm install cached
-
+      APPVEYOR_CACHE_SKIP_RESTORE: true # ?????
 
 cache:
   - 'C:\projects\deps\llvm-8.0.1.src' # Comment out after llvm install cached
