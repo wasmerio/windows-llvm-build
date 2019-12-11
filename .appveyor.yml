@@ -15,7 +15,7 @@ cache:
   - 'C:\projects\deps\llvm-8.0.1.src' # Comment out after llvm install cached
   - 'C:\projects\deps\llvm-8.0.1-build-dir' # Comment out after llvm install cached
   - 'C:\projects\deps\llvm-8.0.1-install'
-  - 'C:\ProgramData\chocolatey\'
+#  - 'C:\ProgramData\chocolatey\'
 
 install:
   # Install Ninja and LLVM 9.
