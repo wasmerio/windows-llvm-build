@@ -1,6 +1,6 @@
 version: "{build} ~ {branch}"
 
-os: Visual Studio 2019
+os: Visual Studio 2017
 
 environment:
   matrix:
@@ -17,8 +17,8 @@ cache:
   - 'C:\projects\deps\llvm-8.0.1-install'
 
 install:
-  # Install Ninja.
-  - choco install ninja
+  # Install Ninja and LLVM 9.
+  - choco install ninja llvm
   # Install LLVM
   - set "LLVM_INSTALLED=C:\projects\deps\llvm-8.0.1-install\LLVMInstalledAllTargets.txt"
   - if exist %LLVM_INSTALLED% echo LLVMInstalled.txt found, using cached version
@@ -31,8 +31,8 @@ install:
   - if not exist C:\projects\deps\llvm-8.0.1.src appveyor DownloadFile https://github.com/llvm/llvm-project/releases/download/llvmorg-8.0.1/llvm-8.0.1.src.tar.xz -FileName llvm-8.0.1.src.tar.xz
   - if not exist C:\projects\deps\llvm-8.0.1.src 7z x "llvm-8.0.1.src.tar.xz" -so | 7z x -aoa -si -ttar
   - if not exist %LLVM_INSTALLED% cd C:\projects\deps\llvm-8.0.1-build-dir
-  - call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat"
-  - if not exist %LLVM_INSTALLED% cmake -G Ninja -UCMAKE_GENERATOR_TOOLSET -DCMAKE_INSTALL_PREFIX="C:\projects\deps\llvm-8.0.1-install" -DLLVM_TARGETS_TO_BUILD="X86;AArch64" -DLLVM_BUILD_EXAMPLES=OFF -DLLVM_INCLUDE_EXAMPLES=OFF -DLLVM_BUILD_TESTS=OFF -DLLVM_INCLUDE_TESTS=OFF C:\projects\deps\llvm-8.0.1.src
+  - call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars64.bat"
+  - if not exist %LLVM_INSTALLED% cmake -G Ninja -UCMAKE_GENERATOR_TOOLSET -DCMAKE_C_COMPILER="C:\ProgramData\chocolatey\lib\llvm\clang-cl.exe" -DCMAKE_CXX_COMPILER="C:\ProgramData\chocolatey\lib\llvm\clang-cl.exe" -DCMAKE_LINKER="C:\ProgramData\chocolatey\lib\llvm\lld-link.exe" -DCMAKE_INSTALL_PREFIX="C:\projects\deps\llvm-8.0.1-install" -DLLVM_TARGETS_TO_BUILD="X86;AArch64" -DLLVM_BUILD_EXAMPLES=OFF -DLLVM_INCLUDE_EXAMPLES=OFF -DLLVM_BUILD_TESTS=OFF -DLLVM_INCLUDE_TESTS=OFF C:\projects\deps\llvm-8.0.1.src
   # - if not exist %LLVM_INSTALLED% cmake -G Ninja -DCMAKE_INSTALL_PREFIX="C:\projects\deps\llvm-8.0.1-install" -DLLVM_TARGETS_TO_BUILD="all" -DLLVM_BUILD_EXAMPLES=OFF -DLLVM_INCLUDE_EXAMPLES=OFF -DLLVM_BUILD_TESTS=OFF -DLLVM_INCLUDE_TESTS=OFF C:\projects\deps\llvm-8.0.1.src
   - if not exist %LLVM_INSTALLED% cmake --build . --config Release --target install
   - if not exist %LLVM_INSTALLED% dir C:\projects\deps\llvm-8.0.1-install\bin
